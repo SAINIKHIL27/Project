@@ -1,0 +1,25 @@
+//find the maximum number of meetings in a room given a set of meetings with start and end times determine the maximum number of meetings that can be scheduled in single room
+//intervals [] = [(1,4),(2,5),(3,6),(5,8),(7,9)]
+
+import java.util.*;
+public class MeetingScheduler {
+    public static int maxMeetings(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[1], b[1]));
+        int count = 0;  
+        int lastEndTime = Integer.MIN_VALUE; 
+        for (int[] meeting : intervals) {
+            int start = meeting[0];
+            int end = meeting[1];
+            if (start >= lastEndTime) {
+                count++;  
+                lastEndTime = end;  
+            }
+        }
+        return count;  
+    }
+    public static void main(String[] args) {
+        int[][] intervals = {{1, 4}, {2, 5}, {3, 6}, {5, 8}, {7, 9}};
+        System.out.println("Maximum number of meetings: " + maxMeetings(intervals));
+    }
+}
+
